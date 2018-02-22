@@ -17,7 +17,6 @@
 from typing import Dict, List, Callable, Any
 
 from cirq import ops
-from cirq.circuits.circuit import Circuit
 from cirq.circuits.moment import Moment
 from cirq.extension import Extensions
 
@@ -223,9 +222,9 @@ def _str_lexi(value):
     return ''.join(output)
 
 
-def to_ascii(circuit: Circuit,
+def to_ascii(circuit: 'Circuit',
              ext: Extensions = Extensions(),
-             use_unicode_characters: bool = False,
+             use_unicode_characters: bool = True,
              transpose: bool = False,
              qubit_order_key: Callable[[ops.QubitId], Any] = None) -> str:
     """Paints an ascii diagram describing the given circuit.

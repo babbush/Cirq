@@ -349,3 +349,42 @@ class TrialResult(cirq.study.TrialResult):
         # TODO(dabacon): This should be optional, since it can be rather big.
         self.final_state = final_step_result.state()
 
+    def __str__(self):
+        def bitstring(vals):
+            return ''.join('1' if v else '0' for v in vals)
+
+        keyed_bitstrings = [
+            (key, bitstring(val)) for key, val in self.measurements.items()
+        ]
+        sorted_bitstrings = sorted(keyed_bitstrings, key=lambda e: e[0])
+        return '\n'.join('{}: {}'.format(repr(key), val)
+                         for key, val in sorted_bitstrings)
+
+
+def main():
+
+        import cirq
+
+        # Define a qubit.
+        qubit = cirq.google.XmonQubit(0, 0)
+
+        # Create a circuit (qubits start in the |0> state).
+        circuit = cirq.Circuit()
+        circuit.append([
+            # Square root of NOT.
+            cirq.X(qubit)**0.5,
+
+            # Measurement.
+            cirq.MeasurementGate('result').on(qubit)
+        ])
+        print("Circuit:")
+        print(cirq.to_ascii(circuit))
+
+        # Now simulate the circuit and print out the measurement result.
+        simulator = cirq.sim.google.xmon_simulator.Simulator()
+        results = []
+        for _ in range(10):
+            _, result = simulator.run(circuit)
+            results.append('1' if result.measurements['result'][0] else '0')
+        print("Simulated measurement results:")
+        print(''.join(results))

@@ -20,6 +20,7 @@ from cirq import ops
 from cirq.circuits.insert_strategy import InsertStrategy
 from cirq.circuits.moment import Moment
 from cirq.ops import QubitId
+from cirq.circuits.ascii_drawer import to_ascii
 
 
 class Circuit(object):
@@ -280,5 +281,4 @@ class Circuit(object):
         return 'Circuit([{}])'.format(','.join(moment_lines))
 
     def __str__(self):
-        moment_lines = ('\n    ' + str(moment) for moment in self.moments)
-        return 'Circuit [{}\n]'.format(''.join(moment_lines))
+        return to_ascii(self)

@@ -14,17 +14,16 @@
 
 from cirq import circuits
 from cirq import ops
-from cirq.google import ExpZGate, MergeInteractions, MergeRotations
-from cirq.study import ParameterizedValue
+from cirq.google import ExpZGate, ParameterizedValue
 
 
 def assert_optimizes(before, after):
-    opt = MergeInteractions()
+    opt = circuits.MergeInteractions()
     opt.optimize_circuit(before)
 
     # Ignore differences that would be caught by follow-up optimizations.
     followup_optimizations = [
-        MergeRotations(),
+        circuits.MergeRotations(),
         circuits.DropNegligible(),
         circuits.DropEmptyMoments()
     ]

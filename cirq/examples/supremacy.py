@@ -24,10 +24,10 @@ def generate_supremacy_circuit(device, cz_depth):
 
     i = 0
     while cz_depth > 0:
-        cz_layer = make_cz_layer(device, i)
+        cz_layer = list(make_cz_layer(device, i))
         if cz_layer:
             circuit.append(make_random_single_qubit_op_layer(device))
-            circuit.append(make_cz_layer(device, i))
+            circuit.append(cz_layer)
             cz_depth -= 1
         i += 1
 

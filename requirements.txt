@@ -1,7 +1,6 @@
 3to2
 absl-py
 mypy
-matplotlib
 numpy
 pylint
 pytest

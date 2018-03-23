@@ -137,7 +137,7 @@ So if you are using a custom gate, there are multiple options
 for getting it to work with the simulator:
 * Define it directly as an ``XmonGate``.
 * Provide a ``CompositeGate`` made up of ``XmonGates``.
-* Supply an ``Exentension`` to the simulator which converts
+* Supply an ``Extension`` to the simulator which converts
 the gate to an ``XmonGate`` (TODO(dabacon): not implemented yet). 
 
 ### Parameterized Values and Studies
